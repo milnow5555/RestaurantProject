@@ -36,7 +36,8 @@ public class ClientMainView extends AppCompatActivity {
 
     @BindView(R.id.nameText)
     TextView nameText;
-
+    @BindView(R.id.progressBar6)
+    ProgressBar progressBar6;
     private FirebaseAuth authorisation;
     private FirebaseUser firebaseUser;
 
@@ -63,6 +64,7 @@ public class ClientMainView extends AppCompatActivity {
         } else {
             addItemsToDrawerWhenNotLogged();
         }
+
     }
     private void addItemsToDrawerWhenLogged() {
         drawerList.setAdapter(null);
@@ -70,7 +72,15 @@ public class ClientMainView extends AppCompatActivity {
         drawerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, osArray);
 
         drawerList.setAdapter(drawerAdapter); //TODO Kolor czcionki z czarnego na bialy w listview (swoj wlasny adapter najlepiej)
+        drawerList.setOnItemClickListener((parent, view, position, id) -> {
 
+            if(position == 3) {
+                logOut();
+            }else{
+                Toast.makeText(getApplicationContext(),"Do zrobienia",Toast.LENGTH_LONG).show();
+            }
+
+        });
 
     }
     private void addItemsToDrawerWhenNotLogged() {
@@ -126,6 +136,7 @@ public class ClientMainView extends AppCompatActivity {
 
             firebaseUser = authorisation.getCurrentUser();
             if(firebaseUser!= null) {
+                progressBar6.setVisibility(View.VISIBLE);
                 Log.i("Msg","KURRRRRRRRRRRWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA22222222222222222222222222a");
                 String uid = firebaseUser.getUid();
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(uid);
@@ -136,10 +147,14 @@ public class ClientMainView extends AppCompatActivity {
                         DataSnapshot name = dataSnapshot.child("Name");
                         DataSnapshot surname = dataSnapshot.child("Name");
                         actualName = name.getValue(String.class);
-                        nameText.setVisibility(View.VISIBLE);   //TODO odseparuj funkcje
+                          //TODO odseparuj funkcje
                         //ToDO Dodaj progress bar
                         nameText.setText(actualName);
                         Log.i("NAMEEEEEEEEEE", "IMIEE " + actualName);
+                        if(nameText.getText()!=null){
+                            nameText.setVisibility(View.VISIBLE);
+                            progressBar6.setVisibility(View.INVISIBLE);
+                        }
                         //tu widocznosc daj
                     }
 
@@ -156,9 +171,11 @@ public class ClientMainView extends AppCompatActivity {
     }
 
 
-    public void logOut(View view){
+    public void logOut(){
         if(authorisation.getCurrentUser() != null) {
             FirebaseAuth.getInstance().signOut();
+            finish();
+            startActivity(getIntent());
         }
     }
     public void login(View view){
