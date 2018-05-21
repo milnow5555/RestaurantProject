@@ -16,8 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoggingActivity" />
-        <activity android:name=".ClientMainView"></activity>
+        <activity android:name=".View.LoggingView" />
+        <activity android:name=".View.ClientMainView" />
+        <activity android:name=".View.MyMealsView" />
+        <activity android:name=".View.RestaurantInfo" />
+        <activity android:name=".View.CreateUserView" />
+        <activity android:name=".View.DatabaseLoaderView"></activity>
     </application>
 
 </manifest>

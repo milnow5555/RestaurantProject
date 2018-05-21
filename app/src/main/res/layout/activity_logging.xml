@@ -1,61 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context="com.milnow5555.restaurantproject.View.LoggingView">
+
+
+<RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.milnow5555.restaurantproject.LoggingActivity"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:layout_weight="1">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/logo" />
+
+</RelativeLayout>
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Logging Screen"
-            android:textSize="20sp"
-            android:layout_gravity="center"
-            />
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:orientation="vertical"
-        android:layout_weight="2">
-         <EditText
-             android:id="@+id/login"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_marginBottom="5dp" />
-
-         <EditText
-             android:id="@+id/passwd"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:inputType="textPassword"
-             android:layout_gravity="center"/>
-    </LinearLayout>
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:orientation="vertical">
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:hint="email"
+            android:paddingBottom="15dp"
+            android:textColorHint="@color/colorAccent" />
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:paddingBottom="15dp"
+            android:textColorHint="@color/colorAccent" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:id="@+id/buttonLogin"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Log in!"
-            android:textSize="20sp"
-            android:onClick="verify"/>
+            android:layout_margin="7dp"
+            android:background="@drawable/round_button"
+            android:text="Login"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:onClick="logIn"/>
+
+        <TextView
+            android:id="@+id/textViewSignup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="Don't have account? Sign Up"
+            android:textAlignment="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorAccent"
+            android:onClick="signUp"/>
+
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
+</RelativeLayout>
+
 
 </LinearLayout>

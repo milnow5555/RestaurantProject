@@ -1,25 +1,17 @@
 package com.milnow5555.restaurantproject;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.milnow5555.restaurantproject.View.ClientMainView;
 
-import java.util.HashMap;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-//    DatabaseReference firebaseDatabase;
+    private FirebaseAuth authorisation;
 
 
 
@@ -28,11 +20,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        authorisation = FirebaseAuth.getInstance();
+        if (authorisation.getCurrentUser() != null) authorisation.signOut();
 
         startActivity(new Intent(this,ClientMainView.class));
 
-//        firebaseDatabase = FirebaseDatabase.getInstance().getReference();
-//        firebaseDatabase.child("Email");
     }
 
 
