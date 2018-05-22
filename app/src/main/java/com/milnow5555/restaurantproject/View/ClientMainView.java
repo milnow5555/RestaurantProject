@@ -144,7 +144,7 @@ public class ClientMainView extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        DataSnapshot name = dataSnapshot.child("Name");
+                        DataSnapshot name = dataSnapshot.child("Name ");
                         DataSnapshot surname = dataSnapshot.child("Name");
                         actualName = name.getValue(String.class);
                           //TODO odseparuj funkcje
