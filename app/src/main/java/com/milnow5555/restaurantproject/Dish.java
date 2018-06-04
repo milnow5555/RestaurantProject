@@ -1,9 +1,8 @@
 package com.milnow5555.restaurantproject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class Meal {
+public class Dish {
 
     private String _name;
     private double _weight;
@@ -19,17 +18,12 @@ public class Meal {
         return _name;
     }
 
-    public double get_weight() {
-        return _weight;
-    }
-
     public List<String> get_components() {
         return _components;
     }
 
-    public Meal(String name, double weight, double price, List<String> components) {
+    public Dish(String name, double price, List<String> components) {
         _name = name;
-        _weight = weight;
         _price = price;
         _components = components;
     }

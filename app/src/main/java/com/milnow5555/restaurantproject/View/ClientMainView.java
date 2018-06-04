@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.*;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.milnow5555.restaurantproject.Database.FireBaseConnection;
 import com.milnow5555.restaurantproject.R;
 //import com.milnow5555.restaurantproject.Database.DatabaseService;
 import com.milnow5555.restaurantproject.Domain.Client;
@@ -40,6 +42,7 @@ public class ClientMainView extends AppCompatActivity {
     ProgressBar progressBar6;
     private FirebaseAuth authorisation;
     private FirebaseUser firebaseUser;
+    private FireBaseConnection connection=new FireBaseConnection("Users");
 
     String actualName;
 
@@ -139,8 +142,15 @@ public class ClientMainView extends AppCompatActivity {
                 progressBar6.setVisibility(View.VISIBLE);
                 Log.i("Msg","KURRRRRRRRRRRWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA22222222222222222222222222a");
                 String uid = firebaseUser.getUid();
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(uid);
-                databaseReference.addValueEventListener(new ValueEventListener() {
+                Map<String,Object> user=connection.getValueFromFireBase((uid));
+                //DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(uid);
+                Client client=(Client)user.get(uid);
+                nameText.setText(client.getName());
+                if(nameText.getText()!=null) {
+                    nameText.setVisibility(View.VISIBLE);
+                    progressBar6.setVisibility(View.INVISIBLE);
+                }
+                /*databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -162,7 +172,7 @@ public class ClientMainView extends AppCompatActivity {
                     public void onCancelled(DatabaseError databaseError) {
 
                     }
-                });
+                });*/
             } else {
                 Log.i("Msg","ERRRRRRRRRRRRRRRRRRRRRRRRRoooooR");
             }

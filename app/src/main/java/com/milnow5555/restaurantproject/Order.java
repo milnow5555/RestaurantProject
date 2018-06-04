@@ -1,34 +1,31 @@
 package com.milnow5555.restaurantproject;
 
-import java.util.ArrayList;
-import java.util.List;
-import com.milnow5555.restaurantproject.Database.;
+import java.util.*;
 
 public class Order {
 
-    private List<Meal> _meals;
+    private List<Dish> _dishes;
     private String _state;
     private Long _id;
     private int _table;
 
 
 
-    public Order(List<Meal> meals, String state, Long id,int table) {
-        _meals = meals;
+    public Order(List<Dish> meals, String state, int table) {
+        _dishes = meals;
         _state = state;
-        _id = id;
         _table=table;
     }
 
-    public void addMeal(String name,double weight, double price,List<String> components)
+    public void addMeal(String name, double price,List<String> components)
     {
-        _meals.add(new Meal(name,weight,price,components));
+        _dishes.add(new Dish(name,price,components));
     }
 
     public double getOrderCost()
     {
         double cost=0;
-        for(Meal meal:_meals)
+        for(Dish meal: _dishes)
         {
             cost+= meal.get_price();
         }
@@ -37,11 +34,11 @@ public class Order {
 
     public void removeMeal(String name)
     {
-        for(Meal meal:_meals)
+        for(Dish dish: _dishes)
         {
-            if(meal.get_name()==name)
+            if(dish.get_name()==name)
             {
-                _meals.remove(meal);
+                _dishes.remove(dish);
                 break;
             }
         }
