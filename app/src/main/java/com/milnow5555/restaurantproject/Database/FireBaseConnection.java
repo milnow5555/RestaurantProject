@@ -28,9 +28,9 @@ public class FireBaseConnection implements ISendData {
         childRef.push().setValue(data);
     }
 
-    public Map<String,Object> getValueFromFireBase(String firstNode)
+    public Map<String,Object> getValueFromFireBase(String firstNode) 
     {
-        DatabaseReference firstRef=childRef.getReference(firstNode);
+        DatabaseReference firstRef=FirebaseDatabase.getInstance().getReference(firstNode);
 
         firstRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @java.lang.Override
@@ -46,14 +46,14 @@ public class FireBaseConnection implements ISendData {
         return map;
     }
 
-    public Object getChangeValueFromFireBase(String className)
+    public Object getChangeValueFromFireBase(String className) throws ClassNotFoundException
     {
-        final Object obj;
-        Class clas=Class.foName(objectName);
+        final Object[] obj = new Object[1];
+        Class clas=Class.forName(className);
         childRef.addValueEventListener(new ValueEventListener() {
             @java.lang.Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                obj=dataSnapshot.getValue(clas);
+                obj[0] =dataSnapshot.getValue(clas);
             }
 
             @java.lang.Override
@@ -61,18 +61,18 @@ public class FireBaseConnection implements ISendData {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
-        return obj;
+        return obj[0];
     }
 
-    public Object getChangeValueFromFireBase(String firstNode,String className)
+    public Object getChangeValueFromFireBase(String firstNode,String className) throws ClassNotFoundException
     {
         DatabaseReference firstRef=childRef.child(firstNode);
-        final Object obj;
-        Class clas=Class.foName(objectName);
+        final Object[] obj = new Object[1];
+        Class clas=Class.forName(className);
         firstNode.addValueEventListener(new ValueEventListener() {
             @java.lang.Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                obj=dataSnapshot.getValue(clas);
+                obj[0] =dataSnapshot.getValue(clas);
             }
 
             @java.lang.Override
@@ -80,19 +80,19 @@ public class FireBaseConnection implements ISendData {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
-        return obj;
+        return obj[0];
     }
 
-    public Object getChangeValueFromFireBase(String firstNode,String secondNode,String className)
+    public Object getChangeValueFromFireBase(String firstNode,String secondNode,String className) throws ClassNotFoundException
     {
         DatabaseReference firstRef=childRef.child(firstNode);
         DatabaseReference secondRef=firstRef.child(secondNode);
-        final Object obj;
-        Class clas=Class.foName(objectName);
+        final Object[] obj = new Object[1];
+        Class clas=Class.forName(className);
         secondRef.addValueEventListener(new ValueEventListener() {
             @java.lang.Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                obj=dataSnapshot.getValue(clas);
+                obj[0] =dataSnapshot.getValue(clas);
             }
 
             @java.lang.Override
@@ -100,6 +100,6 @@ public class FireBaseConnection implements ISendData {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
-        return obj;
+        return obj[0];
     }
 }
